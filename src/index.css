@@ -1143,6 +1143,17 @@ body {
   object-fit: contain;
 }
 
+/* Corazón rojo */
+.icon-heart-red {
+  fill: red;
+  stroke: red;
+}
+
+/* Corazón gris */
+.icon-heart-gray {
+  fill: gray;
+  stroke: gray;
+}
 @media (max-width: 1024px) {
   .product-detail-container {
     grid-template-columns: 1fr;
