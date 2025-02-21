@@ -38,7 +38,8 @@ export function Products() {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const response = await fetch(`https://muyabackend.onrender.com/favoritos`);
+        const userId = localStorage.getItem("userId");
+        const response = await fetch(`https://muyabackend.onrender.com/favoritos/usuario/${userId}`);
         if (!response.ok) throw new Error("Error al obtener favoritos");
         const data = await response.json();
         setFavorites(new Set(data.map((fav) => fav.pro_id))); // Guardamos los productos favoritos en un Set
@@ -130,7 +131,7 @@ export function Products() {
                   <ShoppingCart className="w-4 h-4" />
                   <span>Comprar</span>
                 </button>
-                <button className="product-button favorite" onClick={() => handleFavoriteToggle(product.pro_id)}>
+                <button className="favorite-button favorite" onClick={() => handleFavoriteToggle(product.pro_id)}>
                   {/* Verifica si el producto está en favoritos */}
                   {favorites.has(product.pro_id) ? (
                     // Corazón rojo si el producto está en favoritos

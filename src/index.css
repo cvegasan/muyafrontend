@@ -1143,17 +1143,6 @@ body {
   object-fit: contain;
 }
 
-/* Corazón rojo */
-.icon-heart-red {
-  fill: red;
-  stroke: red;
-}
-
-/* Corazón gris */
-.icon-heart-gray {
-  fill: gray;
-  stroke: gray;
-}
 @media (max-width: 1024px) {
   .product-detail-container {
     grid-template-columns: 1fr;
@@ -1645,6 +1634,23 @@ body {
 .about-button:hover {
   background: white;
   color: black;
+}
+
+/*Quita Borde boton favoritos (corazón)*/
+.favorite-button{
+  border: 0px;
+}
+
+/* Corazón rojo */
+.icon-heart-red {
+  fill: red;
+  stroke: red;
+}
+
+/* Corazón gris */
+.icon-heart-gray {
+  fill: gray;
+  stroke: gray;
 }
 
 /* 🎯 RESPONSIVE DESIGN */
