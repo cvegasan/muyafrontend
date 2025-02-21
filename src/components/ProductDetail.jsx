@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ShoppingCart, ArrowRight } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { toast } from "sonner";
-
+import FormatoMiles from './FormatoMiles';
 export function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -98,7 +98,7 @@ export function ProductDetail() {
 
   const renderStars = (rating) => {
     return (
-            <span style={{ color: "gold" }}>{"★".repeat(rating)}{"☆".repeat(5 - rating)}</span>
+            <span className="star-default">{"★".repeat(rating)}{"☆".repeat(5 - rating)}</span>
     );
   };
 
@@ -116,7 +116,7 @@ export function ProductDetail() {
           </div>
           <div className="product-detail-price">
             <p>
-              <strong>Precio:</strong> ${Number(product.pro_precio).toLocaleString()}
+              <strong>Precio:</strong> $<FormatoMiles numero = {product.pro_precio}  />
             </p>
           </div>
           <div className="product-detail-form">
@@ -144,7 +144,7 @@ export function ProductDetail() {
       <div className="product-reviews">
         <h2>Reseñas del Producto</h2>
         {reviews.length > 0 ? (
-          <div className="review-list" style={{ listStyleType: "none" }}>
+          <div className="review-list supr-style">
             {reviews.map((review) => (
               <div key={review.res_id} className="review-item">
                 <strong>{review.usu_nombre}:</strong> {review.res_comentario} <br />
@@ -159,14 +159,14 @@ export function ProductDetail() {
         )}
 
         {userId && (
-          <div className="add-review" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <div className="add-review review-container">
             <h3>Agregar una reseña</h3>
             <textarea value={newReview} onChange={(e) => setNewReview(e.target.value)} placeholder="Escribe tu reseña..." style={{ width: "100%", padding: "10px" }} />
             <div className="star-rating">
               {[1, 2, 3, 4, 5].map((star) => (
-                <span key={star} onClick={() => setNewRating(star)} style={{ cursor: "pointer", fontSize: "24px", color: star <= newRating ? "gold" : "gray" }}>
-                  ★
-                </span>
+                <span key={star} onClick={() => setNewRating(star)} className={`star ${star <= newRating ? "active" : ""}`}>
+                ★
+              </span>
               ))}
             </div>
             <button  onClick={handleSubmitReview} className="pay-all-button" >Enviar Reseña</button>

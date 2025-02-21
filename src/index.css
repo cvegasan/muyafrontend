@@ -1652,7 +1652,28 @@ body {
   fill: gray;
   stroke: gray;
 }
+/* Estrellas para la evaluacion producto*/
+.star {
+  cursor: pointer;
+  font-size: 24px;
+  color: gray;
+}
 
+.star.active {
+  color: gold;
+}
+.star-default{
+  color: gold;
+}
+.supr-style{
+  list-style-type: none;
+}
+
+.review-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 /* 🎯 RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .login-container {
