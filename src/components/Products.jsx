@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Eye, ShoppingCart, Heart, HeartOff } from "lucide-react";
+import { Eye, ShoppingCart} from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { toast } from "sonner";
 import FormatoMiles from './FormatoMiles';
+import FavoriteButton from './FavoriteButton';  // Importa el nuevo componente
 export function Products() {
   const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
@@ -131,16 +132,11 @@ export function Products() {
                   <ShoppingCart className="w-4 h-4" />
                   <span>Comprar</span>
                 </button>
-                <button className="favorite-button favorite" onClick={() => handleFavoriteToggle(product.pro_id)}>
-                  {/* Verifica si el producto está en favoritos */}
-                  {favorites.has(product.pro_id) ? (
-                    // Corazón rojo si el producto está en favoritos
-                    <Heart className="w-4 h-4 icon-heart-red" />
-                  ) : (
-                    // Corazón gris/blanco si el producto no está en favoritos
-                    <HeartOff className="w-4 h-4  icon-heart-gray"/>
-                  )}
-              </button>
+                <FavoriteButton
+                  productId={product.pro_id}
+                  favorites={favorites}
+                  handleFavoriteToggle={handleFavoriteToggle}
+                />
               </div>
             </div>
           ))}
