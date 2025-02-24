@@ -1674,6 +1674,11 @@ body {
   flex-direction: column;
   gap: 10px;
 }
+
+.review-form-comments{
+  width: "100%";
+  padding: 10px;
+}
 /* 🎯 RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .login-container {

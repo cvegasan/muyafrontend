@@ -4,6 +4,8 @@ import { ShoppingCart, ArrowRight } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { toast } from "sonner";
 import FormatoMiles from './FormatoMiles';
+import ReviewSection from "./ReviewSection";
+
 export function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -88,7 +90,7 @@ export function ProductDetail() {
       const newResena = await response.json();
       setReviews([...reviews, newResena]);
       setNewReview("");
-      setNewRating(5);
+      setNewRating(1);
       toast.success("Reseña añadida con éxito");
     } catch (err) {
       console.error("Error enviando la reseña:", err);
@@ -141,38 +143,16 @@ export function ProductDetail() {
         </div>
       
       {/* Sección de Reseñas */}
-      <div className="product-reviews">
-        <h2>Reseñas del Producto</h2>
-        {reviews.length > 0 ? (
-          <div className="review-list supr-style">
-            {reviews.map((review) => (
-              <div key={review.res_id} className="review-item">
-                <strong>{review.usu_nombre}:</strong> {review.res_comentario} <br />
-                <span className="review-stars">{renderStars(review.res_calificacion)}</span>
-                <br />
-                <small>Fecha: {review.res_fecha}</small>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No hay reseñas disponibles para este producto.</p>
-        )}
-
-        {userId && (
-          <div className="add-review review-container">
-            <h3>Agregar una reseña</h3>
-            <textarea value={newReview} onChange={(e) => setNewReview(e.target.value)} placeholder="Escribe tu reseña..." style={{ width: "100%", padding: "10px" }} />
-            <div className="star-rating">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span key={star} onClick={() => setNewRating(star)} className={`star ${star <= newRating ? "active" : ""}`}>
-                ★
-              </span>
-              ))}
-            </div>
-            <button  onClick={handleSubmitReview} className="pay-all-button" >Enviar Reseña</button>
-          </div>
-        )}
-      </div>
+        <ReviewSection 
+          reviews={reviews} 
+          userId={userId} 
+          newReview={newReview} 
+          setNewReview={setNewReview} 
+          newRating={newRating} 
+          setNewRating={setNewRating} 
+          handleSubmitReview={handleSubmitReview} 
+          renderStars={renderStars} 
+        />
       </div> {/*container*/}
     </div>
   );
